@@ -6,8 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class MyDto {
+public class SuccessfulIpInspectionResponseDto extends ErrorIpInspectorResponseDto {
 
-    
+    private String country;
+    private Double cotization;
 
 }
