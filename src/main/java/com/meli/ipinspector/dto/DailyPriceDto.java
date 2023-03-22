@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class DailyPriceDto {
 
     private String country;
-    private double cotization;
-    private LocalDateTime cotizationDate;
+    private double dailyPrice;
+    private LocalDateTime dailyPriceDate;
 
 }

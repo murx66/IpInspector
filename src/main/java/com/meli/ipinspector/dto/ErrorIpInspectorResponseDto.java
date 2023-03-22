@@ -1,11 +1,9 @@
 package com.meli.ipinspector.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
+@EqualsAndHashCode(callSuper = true)
 public class ErrorIpInspectorResponseDto extends IpInspectionResponseDto{
 
     private String errorMessage;

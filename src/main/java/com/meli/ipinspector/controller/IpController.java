@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("ips")
+@RequestMapping("/ips")
 public class IpController {
 
     private IpInspectorService inpectorService;
@@ -19,21 +19,30 @@ public class IpController {
         this.inpectorService = inpectorService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/{ip}")
     @ResponseBody
     public ResponseEntity<IpInspectionResponseDto> getIpInformation(@PathVariable String ip){
         try{
             return ResponseEntity.ok(inpectorService.getIpInformation(ip));
         }
         catch(IpInspectorException iie){
-            return ResponseEntity.internalServerError().body(ErrorIpInspectorResponseDto.builder().errorMessage(iie.getMessage()););
+            return ResponseEntity.internalServerError().body(ErrorIpInspectorResponseDto.builder().errorMessage(iie.getMessage()).build());
         }
     }
 
-    @GetMapping("/blacklist")
+    @PostMapping("/blacklist/add")
     @ResponseBody
-    public ResponseEntity<BlacklistedIpsDto> getBlacklistedIps(){
-        return ResponseEntity.ok(inpectorService.getCurrentBlacklistedIps());
+    public ResponseEntity<String> addToBlackList(@RequestBody String ip){
+        try{
+            inpectorService.addToBlackList(ip);
+            return ResponseEntity.ok("IP blacklisted successfully");
+        }
+        catch(IpInspectorException iie){
+            return ResponseEntity.internalServerError().body(iie.getMessage());
+        }
+        catch(Exception e){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

@@ -1,14 +1,12 @@
 package com.meli.ipinspector.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
-public class SuccessfulIpInspectionResponseDto extends ErrorIpInspectorResponseDto {
+@EqualsAndHashCode(callSuper = true)
+public class SuccessfulIpInspectionResponseDto extends IpInspectionResponseDto {
 
-    private String country;
-    private Double cotization;
+    private CountryDto country;
+    private Double dailyPrice;
 
 }
